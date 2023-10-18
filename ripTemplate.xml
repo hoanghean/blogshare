@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:version='2' class='v2'>
+  <head>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
+ <b:if cond='data:view.isMultipleItems'>
+    <meta content='summary' name='twitter:card'/>
+    <meta content='' name='twitter:site'/>
+    <meta content='' name='twitter:creator'/>
+    <meta expr:content='data:blog.title' name='twitter:title'/>
+    <meta expr:content='data:blog.canonicalUrl' name='twitter:url'/>
+    <meta expr:content='data:blog.metaDescription' name='twitter:description'/>
+    <meta content='https://i.imgur.com/X4hSa0G.jpg' name='twitter:image'/>
+    <meta content='' property='fb:app_id'/>
+    <meta content='' property='fb:admins'/>
+    <meta content='' property='og:site_name'/>
+    <meta content='website' property='og:type'/>
+    <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
+    <meta expr:content='data:blog.title' property='og:title'/>
+    <meta expr:content='data:blog.metaDescription' property='og:description'/>
+    <meta content='https://i.imgur.com/X4hSa0G.jpg' property='og:image'/>
+    <meta expr:content='data:blog.title' property='og:image:alt'/>
+    <meta content='website' property='og:type'/>
+    <meta expr:content='data:blog.canonicalUrl' itemprop='og:url'/>
+    <meta expr:content='data:blog.title' itemprop='og:headline'/>
+    <meta expr:content='data:blog.metaDescription' itemprop='og:description'/>
+    <meta content='https://i.imgur.com/X4hSa0G.jpg' property='og:image'/>
+ </b:if>
+ <!-- DNS prefetch --> 
+<link href='//1.bp.blogspot.com' rel='dns-prefetch'/>
+<link href='//2.bp.blogspot.com' rel='dns-prefetch'/>
+<link href='//3.bp.blogspot.com' rel='dns-prefetch'/>
+<link href='//4.bp.blogspot.com' rel='dns-prefetch'/>
+<link href='//www.blogger.com' rel='dns-prefetch'/>
+<link href='//maxcdn.bootstrapcdn.com' rel='dns-prefetch'/>
+<link href='//fonts.googleapis.com' rel='dns-prefetch'/>
+<link href='//use.fontawesome.com' rel='dns-prefetch'/>
+<link href='//ajax.googleapis.com' rel='dns-prefetch'/>
+<link href='//resources.blogblog.com' rel='dns-prefetch'/>
+<link href='//www.facebook.com' rel='dns-prefetch'/>
+<link href='//plus.google.com' rel='dns-prefetch'/>
+<link href='//twitter.com' rel='dns-prefetch'/>
+<link href='//www.youtube.com' rel='dns-prefetch'/>
+<link href='//feedburner.google.com' rel='dns-prefetch'/>
+<link href='//www.pinterest.com' rel='dns-prefetch'/>
+<link href='//www.linkedin.com' rel='dns-prefetch'/>
+<link href='//feeds.feedburner.com' rel='dns-prefetch'/>
+<link href='//github.com' rel='dns-prefetch'/>
+<link href='//player.vimeo.com' rel='dns-prefetch'/>
+<link href='//platform.twitter.com' rel='dns-prefetch'/>
+<link href='//apis.google.com' rel='dns-prefetch'/>
+<link href='//connect.facebook.net' rel='dns-prefetch'/>
+<link href='//cdnjs.cloudflare.com' rel='dns-prefetch'/>
+<link href='//www.google-analytics.com' rel='dns-prefetch'/>
+<link href='//pagead2.googlesyndication.com' rel='dns-prefetch'/>
+<link href='//googleads.g.doubleclick.net' rel='dns-prefetch'/>
+<link href='//www.gstatic.com' rel='preconnect'/>
+<link href='//www.googletagservices.com' rel='dns-prefetch'/>
+<link href='//static.xx.fbcdn.net' rel='dns-prefetch'/>
+<link href='//tpc.googlesyndication.com' rel='dns-prefetch'/>
+<link href='//syndication.twitter.com' rel='dns-prefetch'/>
+    <title>
+      <!-- tiêu đề -->
+      <data:blog.title/>
+    </title>
+    <b:skin>
+      <![CDATA[
+      /* Chèn Css vào đây */
+
+
+
+      ]]>
+    </b:skin>
+  </head>
+
+<body class="is-loading">
+
+<b:if cond='data:view.isHomepage'>
+<!-- Nội dung chính -->
+
+
+
+
+<script>//<![CDATA[
+<!-- Chèn javascript (nếu có) -->
+
+
+
+//]]></script>
+</b:if>
+
+
+<!-- Không cần quan tâm lắm -->
+<b:if cond='data:view.isError'>
+<!-- áp dụng cho trang lỗi (404 page) -->
+Nội dung 404
+</b:if>
+<!-- Chỗ này không cần sửa, nhưng không được xóa -->
+<b:section class='main' id='mainpost' showaddelement='yes'></b:section>
+<!-- Không cần quan tâm lắm -->
+
+&lt;!--</body>--&gt;&lt;/body&gt;
+</html>
