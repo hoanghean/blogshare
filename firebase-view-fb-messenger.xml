@@ -59,31 +59,102 @@
 <link href='//static.xx.fbcdn.net' rel='dns-prefetch'/>
 <link href='//tpc.googlesyndication.com' rel='dns-prefetch'/>
 <link href='//syndication.twitter.com' rel='dns-prefetch'/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <title>
       <data:blog.title/>
     </title>
     <b:skin>
       <![CDATA[
       /* Chèn Css vào đây */
-
-
-
+.mess {
+  margin-top: 20px;
+  height: 555px;
+  overflow-y: scroll;
+  border: solid orange 3px;
+  border-radius: 5px;
+}
       ]]>
     </b:skin>
   </head>
 
-<body class="is-loading">
+<body>
 
 <b:if cond='data:view.isHomepage'>
 <!-- Nội dung chính -->
 
+<div class="container mt-4 d-flex justify-content-center">
+  <select class="form-select form-select mb-3" id="chatSelect" onchange="loadChat(this.value)"></select>
+</div>
 
+<div class="container mt-4">
+  <h3 style="text-align: center;background: orange;border: solid green;border-radius: 8px;">CHAT FRAME</h3>
+</div>
+<div class="container mess" id="chatContainer">
+  <div id="chatContent">
+    <center><h1>ĐÂY LÀ NỘI DUNG ĐOẠN TIN NHẮN <br>
+     KÉO XUỐNG THẺ SCRIPT TÌM YOUR_FIREBASE_URL VÀ THAY BẰNG URL CỦA BẠN, <br>
+      NẾU KHÔNG LOAD ĐƯỢC TIN NHẮN THÌ VÀO RULES > CHO .read và .write = true</h1></center>
+  </div>
+</div>
 
 
 <script>//<![CDATA[
 <!-- Chèn javascript (nếu có) -->
 
+var chatContainer = document.getElementById('chatContainer');
+var chatContent = document.getElementById('chatContent');
+var chatSelect = document.getElementById('chatSelect');
+var xhr = new XMLHttpRequest()
+var sData = new Array
+var cData = new Array
+var html = '', select = '<option selected>Chọn người liên hệ</option>'
 
+function scrollToBottom() {
+  chatContainer.scrollTop = chatContent.scrollHeight - chatContainer.clientHeight;
+}
+
+function loadUser() {
+  xhr.open("GET", "https://YOUR_FIREBASE_URL.firebasedatabase.app/.json", true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      sData = JSON.parse(xhr.responseText)
+      for (sD in sData) {
+        select += `<option value="${sD}">${sD}</option>`
+      }
+      chatSelect.innerHTML = select
+    }
+  };
+  xhr.send();
+}
+
+function loadChat(uid) {
+  html = ''
+  xhr.open("GET", `https://YOUR_FIREBASE_URL.firebasedatabase.app/${uid}.json`, true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      cData = JSON.parse(xhr.responseText)
+      for (d in cData) {
+        html += `<p><b>${timestampToDateTime(d)}</b>: ${cData[d]}</p>`
+      }
+      chatContent.innerHTML = html
+    }
+    scrollToBottom()
+  };
+  xhr.send();
+}
+
+function timestampToDateTime(timestamp) {
+  var date = new Date(Number(timestamp));
+  var day = date.getDate();
+  var month = date.getMonth() + 1;
+  var year = date.getFullYear();
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var formattedDateTime = `${day}/${month}/${year} ${hours}h${minutes}p`;
+  return formattedDateTime;
+}
+
+loadUser()
 
 //]]></script>
 </b:if>
