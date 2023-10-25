@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:version='2' class='v2'>
+<html b:version='2' class='v2' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
   <head>
     <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
  <b:if cond='data:view.isMultipleItems'>
@@ -59,22 +59,28 @@
 <link href='//static.xx.fbcdn.net' rel='dns-prefetch'/>
 <link href='//tpc.googlesyndication.com' rel='dns-prefetch'/>
 <link href='//syndication.twitter.com' rel='dns-prefetch'/>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel='stylesheet'/>
     <title>
       <data:blog.title/>
     </title>
-    <b:skin>
-      <![CDATA[
-      /* Chèn Css vào đây */
-.mess {
-  margin-top: 20px;
-  height: 555px;
-  overflow-y: scroll;
-  border: solid orange 3px;
-  border-radius: 5px;
+    <b:skin><![CDATA[
+.chat{height:686px;overflow-y:scroll;border:solid #ff7337 3px;border-radius:9px;padding-top:12px}
+.friendList{border:solid #ff7337 3px;border-radius:9px}
+#listU{list-style-type:none;padding:8px;margin:0;overflow-y:scroll;height:600px}
+#listU li{border-radius:10px;background:#ff7337;padding:8px;margin-bottom:10px}
+input{width:100%;margin-top:15px;margin-bottom:10px;border:solid #ff7337 1px;border-radius:8px;padding-left:8px;background:#373737;color:#fff}
+input:focus{border:2px solid #ff7337;outline:none}
+p{background:#ff7337;padding:8px;border-radius:10px;color:#fff}
+body{background: #373737;}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-button{background:transparent;height:30px}
+::-webkit-scrollbar-track{background:#f1f1f1}
+::-webkit-scrollbar-thumb{background:#ff7337;border-radius:6px}
+::-webkit-scrollbar-thumb:hover{background:#555}
+@media (max-width: 768px) {
+.friendList div{max-height:88px;overflow-y:auto}
 }
-      ]]>
-    </b:skin>
+    ]]></b:skin>
   </head>
 
 <body>
@@ -82,46 +88,68 @@
 <b:if cond='data:view.isHomepage'>
 <!-- Nội dung chính -->
 
-<div class="container mt-4 d-flex justify-content-center">
-  <select class="form-select form-select mb-3" id="chatSelect" onchange="loadChat(this.value)"></select>
-</div>
-
-<div class="container mt-4">
-  <h3 style="text-align: center;background: orange;border: solid green;border-radius: 8px;">CHAT FRAME</h3>
-</div>
-<div class="container mess" id="chatContainer">
-  <div id="chatContent">
-    <center><h1>ĐÂY LÀ NỘI DUNG ĐOẠN TIN NHẮN <br>
-     KÉO XUỐNG THẺ SCRIPT TÌM YOUR_FIREBASE_URL VÀ THAY BẰNG URL CỦA BẠN, <br>
-      NẾU KHÔNG LOAD ĐƯỢC TIN NHẮN THÌ VÀO RULES > CHO .read và .write = true</h1></center>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-3 friendList">
+      <input type="text" id="searchIn" placeholder="Tìm người liên hệ..." onkeyup="search()"/>
+      <div id="listU">
+      </div>
+    </div>
+    <div class="col-md-9 chat" id="chatContainer">
+      <div id="chatContent">
+        CHAT CONTENT
+      </div>
+    </div>
   </div>
 </div>
 
-
 <script>//<![CDATA[
 <!-- Chèn javascript (nếu có) -->
-
 var chatContainer = document.getElementById('chatContainer');
 var chatContent = document.getElementById('chatContent');
-var chatSelect = document.getElementById('chatSelect');
+var listU = document.getElementById('listU');
 var xhr = new XMLHttpRequest()
 var sData = new Array
 var cData = new Array
-var html = '', select = '<option selected>Chọn người liên hệ</option>'
+var html = '', u = ''
 
 function scrollToBottom() {
   chatContainer.scrollTop = chatContent.scrollHeight - chatContainer.clientHeight;
 }
 
+function search() {
+    var input, filter, div, p, a, i, txtValue;
+    input = document.getElementById("searchIn");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("listU");
+    p = div.getElementsByTagName("p");
+    for (i = 0; i < p.length; i++) {
+        txtValue = p[i].textContent || p[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            p[i].style.display = "";
+        } else {
+            p[i].style.display = "none";
+        }
+    }
+}
+
+function handleItemClick(event) {
+  loadChat(event.target.textContent)
+}
+
 function loadUser() {
-  xhr.open("GET", "https://YOUR_FIREBASE_URL.firebasedatabase.app/.json", true);
+  xhr.open("GET", "https://URL.firebasedatabase.app/.json", true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       sData = JSON.parse(xhr.responseText)
       for (sD in sData) {
-        select += `<option value="${sD}">${sD}</option>`
+        u += `<p>${sD}</p>`
       }
-      chatSelect.innerHTML = select
+      listU.innerHTML = u
+      var pElements = listU.getElementsByTagName("p");
+        for (var i = 0; i < pElements.length; i++) {
+          pElements[i].addEventListener("click", handleItemClick);
+          }
     }
   };
   xhr.send();
@@ -129,12 +157,26 @@ function loadUser() {
 
 function loadChat(uid) {
   html = ''
-  xhr.open("GET", `https://YOUR_FIREBASE_URL.firebasedatabase.app/${uid}.json`, true);
+  xhr.open("GET", `https://URL.firebasedatabase.app/${uid}.json`, true);
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
       cData = JSON.parse(xhr.responseText)
+      let msg = ''
       for (d in cData) {
-        html += `<p><b>${timestampToDateTime(d)}</b>: ${cData[d]}</p>`
+        let mess = cData[d]
+        if (mess.includes('_nc_cat')) {
+          let msgList = mess.split('|')
+          if (msgList.length > 1) {
+            for (m in msgList) {
+              msg += `<a target="_blank" href="${msgList[m]}">FILE${Number(m) + 1}</a> `
+            }
+          } else {
+            msg = `<a target="_blank" href="${msgList[0]}">FILE1</a> `
+          }
+        } else {
+          msg = mess
+        }
+        html += `<p><b>${timestampToDateTime(d)}</b>: ${msg}</p>`
       }
       chatContent.innerHTML = html
     }
@@ -155,7 +197,6 @@ function timestampToDateTime(timestamp) {
 }
 
 loadUser()
-
 //]]></script>
 </b:if>
 
@@ -166,7 +207,7 @@ loadUser()
 Nội dung 404
 </b:if>
 <!-- Chỗ này không cần sửa, nhưng không được xóa -->
-<b:section class='main' id='mainpost' showaddelement='yes'></b:section>
+<b:section class='main' id='mainpost' showaddelement='yes'/>
 <!-- Không cần quan tâm lắm -->
 
 &lt;!--</body>--&gt;&lt;/body&gt;
