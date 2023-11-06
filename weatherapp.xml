@@ -64,8 +64,6 @@
     </title>
     <b:skin>
       <![CDATA[
-      /* Chèn Css vào đây */
-
 @import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap";
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Open Sans',sans-serif}
 body{background:#E3F2FD}
@@ -110,8 +108,7 @@ h1{font-size:1.45rem;padding:16px 0}
 .weather-input{width:100%}
 .weather-data h2{font-size:1.35rem}
 }
-
-      ]]>
+]]>
     </b:skin>
   </head>
 
