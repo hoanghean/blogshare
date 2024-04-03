@@ -65,9 +65,6 @@
     <b:skin>
       <![CDATA[
       /* Chèn Css vào đây */
-
-
-
       ]]>
     </b:skin>
   </head>
@@ -76,20 +73,12 @@
 
 <b:if cond='data:view.isHomepage'>
 <!-- Nội dung chính -->
-
-
-
-
 <script>//<![CDATA[
 <!-- Chèn javascript (nếu có) -->
-
-
-
 //]]></script>
 </b:if>
 
-
-<!-- Không cần quan tâm lắm -->
+<!-- Không cần quan tâm -->
 <b:if cond='data:view.isError'>
 <!-- áp dụng cho trang lỗi (404 page) -->
 Nội dung 404
