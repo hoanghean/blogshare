@@ -1,3 +1,5 @@
+//============================================= This code get fb info =========================================================
+
 var html = document.body.textContent
 let stringger = html.split('chat_sidebar_contact_rankings')[1].split('</script>')[0]
 text = stringger.split('{"status":0')
@@ -13,7 +15,7 @@ for (let t of text) {
 }
 console.log(ids)
 
-
+//============================================ This main code ==========================================================
 
 function sendMsg(uid, msg, name) {
 	var xhr1 = new XMLHttpRequest()
@@ -58,7 +60,7 @@ var inputVal;
 var listUid = ''
 
 do {
-	inputVal = prompt('Nhập xong mỗi tin nhắn thì nhấn [ENTER] hoặc [Ok], tiếp tục..., kết thúc bằng cách nhấn nút [Cancel]\nNgoài ra có thể dùng <name> để gửi tin nhắn kèm tên của người nhận, ví dụ:\nXin chào <name> nhé')
+	inputVal = prompt('Nhập xong mỗi tin nhắn thì nhấn [ENTER] hoặc [Ok], kết thúc bằng cách nhấn nút [Cancel]\nNgoài ra dùng thẻ <name> để gửi tin nhắn kèm tên của người nhận, ví dụ:\nXin chào <name> nhé')
 	if (inputVal !== null) {
 		msgList.push(inputVal)
 	}
